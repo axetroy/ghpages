@@ -8,9 +8,12 @@ cd $BUILD_DIR
 
 echo "#################################################"
 echo "Now deploying to GitHub Pages..."
-REMOTE_REPO="https://${GH_PAT}@github.com/${GITHUB_REPOSITORY}.git" && \
-REPONAME="$(echo $GITHUB_REPOSITORY| cut -d'/' -f 2)" && \
-OWNER="$(echo $GITHUB_REPOSITORY| cut -d'/' -f 1)" && \
+
+REPOSITORY=$REPOSITORY || $GITHUB_REPOSITORY
+
+REMOTE_REPO="https://${GH_PAT}@github.com/${REPOSITORY}.git" && \
+REPONAME="$(echo $REPOSITORY| cut -d'/' -f 2)" && \
+OWNER="$(echo $REPOSITORY| cut -d'/' -f 1)" && \
 GHIO="${OWNER}.github.io" && \
 if [[ "$REPONAME" == "$GHIO" ]]; then
   REMOTE_BRANCH="master"
